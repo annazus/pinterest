@@ -1,6 +1,6 @@
 import React from "react";
 
-const RegistrationCard = () => (
+const RegistrationCard = ({ toggleLogin }) => (
   <div className="registration-card">
     <header>
       <h1>Sign up to see more</h1>
@@ -12,7 +12,7 @@ const RegistrationCard = () => (
       <input type="text" placeholder="Age" />
       <button>Continue</button>
     </form>
-    <a href="#" className="login-switch">
+    <a href="#" className="login-switch" onClick={toggleLogin}>
       Already a member? Log in
     </a>
   </div>
