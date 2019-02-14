@@ -1,4 +1,86 @@
+* {
+  padding: 0px;
+  margin: 0px;
+  box-sizing: border-box;
+}
 body {
   padding: 10px;
   font-family: sans-serif;
+  color: #222222;
+}
+
+.button {
+  width: 130px;
+  height: 40px;
+  text-align: center;
+  padding: 8px 0px;
+  background-color: rgb(235, 235, 235);
+  color: #222222;
+  font-weight: 700;
+  font-size: 16px;
+  border-radius: 5px;
+}
+
+.registration-card {
+  width: 500px;
+  border-radius: 10px;
+  border: 1px solid darkgrey;
+  height: 400px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+}
+.registration-card header {
+  width: 400px;
+  text-align: center;
+  margin-top: 30px;
+  margin-bottom: 30px;
+  color: #222222;
+}
+.registration-card h1 {
+  margin-bottom: 10px;
+}
+
+.registration-card form {
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+}
+.registration-card form input,
+button {
+  width: 300px;
+  display: block;
+  height: 40px;
+  border: 1px solid darkgray;
+  border-radius: 5px;
+  font-size: 16px;
+  padding: 8px 10px;
+
+  margin-bottom: 10px;
+}
+.registration-card form button {
+  background-color: rgb(223, 62, 62);
+  color: white;
+  border: none;
+  font-weight: 700;
+}
+.registration-card form button:hover {
+  background-color: rgb(215, 0, 0);
+}
+
+.registration-card form {
+  margin-bottom: 20px;
+}
+.registration-card .login-switch:link,
+.registration-card .login-switch:visited {
+  font-size: 0.8em;
+  text-decoration: none;
+
+  font-weight: 900;
+  color: rgb(100, 98, 98);
+}
+.registration-card .login-switch:hover:link,
+.registration-card .login-switch:hover {
+  text-decoration: underline;
 }
