@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import { withTracker } from "meteor/react-meteor-data";
 import PinItem from "../PinItem";
 import { Pins } from "../../../api/pins";
-import uuid from "uuid/v4";
 
 class PinBoard extends Component {
   constructor(props) {
@@ -10,9 +9,8 @@ class PinBoard extends Component {
   }
 
   render() {
-    console.log(uuid());
     return (
-      <div>
+      <div className="pin-board">
         {this.props.pins.map(item => (
           <PinItem pin={item} />
         ))}

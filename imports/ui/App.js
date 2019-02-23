@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { Meteor } from "meteor/meteor";
+import PinBuilder from "./components/PinBuilder";
 import Pin from "./components/Pin";
 
 import LoginCard from "./components/LoginCard";
@@ -36,6 +37,9 @@ class App extends Component {
 
         <Route path="/Login" component={LoginCard} />
         <Route path="/SignOn" component={RegistrationCard} />
+        <Route path="/pin-builder" component={PinBuilder} />
+        <Route path="/pin/:_id" component={Pin} />
+
         <Route component={Nowhere} />
       </Switch>
     );
