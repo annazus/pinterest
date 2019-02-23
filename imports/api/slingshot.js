@@ -9,8 +9,7 @@ if (Meteor.isServer)
     bucket: "appliedar-pinterest",
     region: "us-west-2",
     // acl: "public-read",
-    AWSAccessKeyId: "AKIAJZQAYO4LK7GKJQ7Q",
-    AWSSecretAccessKey: "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",
+
     authorize: function() {
       //Deny uploads if user is not logged in.
       if (!this.userId) {
