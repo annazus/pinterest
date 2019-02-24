@@ -9,7 +9,8 @@ if (Meteor.isServer)
     bucket: "appliedar-pinterest",
     region: "us-west-2",
     // acl: "public-read",
-
+    AWSAccessKeyId: Meteor.settings.aws_s3.AWSAccessKeyId,
+    AWSSecretAccessKey: Meteor.settings.aws_s3.AWSSecretAccessKey,
     authorize: function() {
       //Deny uploads if user is not logged in.
       if (!this.userId) {
