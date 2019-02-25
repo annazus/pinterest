@@ -48,6 +48,7 @@ class RegistrationCard extends Component {
     ) : (
       <div className="registration-card">
         <header>
+          <img src="/images/logo.svg" />
           <h1>Sign up to see more</h1>
           <p>Access best ideas with a free account</p>
         </header>

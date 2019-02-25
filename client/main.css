@@ -26,7 +26,7 @@ body {
   width: 500px;
   border-radius: 10px;
   border: 1px solid darkgrey;
-  height: 400px;
+  height: 500px;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
@@ -35,7 +35,6 @@ body {
 .registration-card header {
   width: 400px;
   text-align: center;
-  margin-top: 30px;
   margin-bottom: 30px;
   color: #222222;
 }
@@ -61,13 +60,13 @@ button {
   margin-bottom: 10px;
 }
 .registration-card form button {
-  background-color: rgb(223, 62, 62);
+  background-color: #2bc016;
   color: white;
   border: none;
   font-weight: 700;
 }
 .registration-card form button:hover {
-  background-color: rgb(215, 0, 0);
+  background-color: #2bc016;
 }
 
 .registration-card form {
@@ -97,7 +96,7 @@ button {
 }
 
 .pin-item {
-  background-color: rgb(221, 224, 224);
+  background-color: #32936f80;
   width: 22%;
   margin: 1%;
   padding: 10px;
@@ -137,7 +136,7 @@ button {
   align-items: center;
 }
 .pin-builder-save {
-  background-color: red;
+  background-color: #2bc016;
   color: white;
   width: 100px;
   height: 40px;
@@ -157,7 +156,7 @@ button {
 .pin-builder-update,
 .pin-builder-delete,
 .pin-builder-cancel {
-  background-color: red;
+  background-color: #2bc016;
   color: white;
   width: 100px;
   height: 40px;
@@ -179,7 +178,7 @@ button {
   align-items: center;
 }
 .pin-image-selector-frame {
-  background-color: #eeeeee;
+  background-color: #32936f;
   padding: 10px;
   border-radius: 10px;
 }
@@ -191,7 +190,7 @@ button {
   display: inline-block;
   text-align: center;
   font-size: 1.3em;
-  color: darkgray;
+  color: #32936f;
   padding-top: 170px;
   border-radius: 10px;
 }
@@ -240,4 +239,40 @@ button {
   width: 300px;
   font-size: 1em;
   font-weight: 700;
+}
+
+.menu-row {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  height: 100px;
+}
+.menu-border {
+  border-top: 1px solid #395e66;
+  height: 1px;
+  width: 100%;
+  background-color: #395e66;
+  margin-bottom: 20px;
+}
+.logout {
+  background-color: #2bc016;
+  color: white;
+  width: 100px;
+  height: 40px;
+  border-radius: 3px;
+  font-weight: 700;
+  text-align: center;
+  margin: 25px;
+}
+.logo {
+  display: block;
+  margin: 20px;
+}
+
+.menu-end {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
 }

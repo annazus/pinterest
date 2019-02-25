@@ -47,6 +47,7 @@ class LoginCard extends Component {
       ) : (
         <div className="registration-card">
           <header>
+            <img src="/images/logo.svg" />
             <h1>Welcome back!</h1>
           </header>
           <form>

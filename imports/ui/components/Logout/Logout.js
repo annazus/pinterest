@@ -14,6 +14,7 @@ class Logout extends Component {
       <Redirect to="/Login" />
     ) : (
       <button
+        className="logout"
         onClick={e => {
           e.preventDefault();
           Meteor.logout();
