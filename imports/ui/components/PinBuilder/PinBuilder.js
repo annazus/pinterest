@@ -6,12 +6,43 @@ import uuid from "uuid";
 class PinBuilder extends Component {
   constructor(props) {
     super(props);
-    this.state = { saved: false, title: "", url: "", description: "" };
+    this.state = {
+      saved: false,
+      title: "",
+      url: "",
+      description: "",
+      errors: [],
+      image: {
+        loading: false,
+        loaded: false,
+        progress: 0,
+        tempUrl: "",
+        finalUrl: ""
+      }
+    };
   }
+
+  validate = () => {
+    let err = [];
+    this.setState({ errors: [] });
+    if (this.state.image.loading) {
+      err.push("Image is still uploading");
+    } else if (!this.state.image.loaded) {
+      err.push("You must select an image");
+    }
+    if (this.state.title.trim() === "") {
+      err.push("Title is required");
+    }
+
+    this.setState({ errors: err.slice() });
+    if (err.length > 0) return false;
+    else return true;
+  };
 
   addPin = e => {
     console.log("adding pin");
     e.preventDefault();
+    if (!this.validate()) return;
     console.log(this.state);
     Pins.insert({
       title: this.state.title,
@@ -24,7 +55,7 @@ class PinBuilder extends Component {
     this.setState({ saved: true });
   };
   updateField = e => {
-    this.setState({ ...this.state, [e.target.name]: e.target.value });
+    this.setState({ [e.target.name]: e.target.value });
     console.log(this.state);
   };
   uploadFile = e => {
@@ -32,12 +63,21 @@ class PinBuilder extends Component {
     e.preventDefault();
     const metaContext = { id: uuid() };
     let uploader = new Slingshot.Upload("pinterest-uploads", metaContext);
+    this.setState({ image: { ...this.state.image, loading: true } });
     this.interval = setInterval(() => {
       const prg = Math.round(uploader.progress() * 100);
       console.log(prg);
       console.log(uploader.url(true));
       this.setState({
-        ...this.state,
+        image: {
+          ...this.state.image,
+          loading: true,
+          progress: prg,
+          tempUrl: uploader.url(true)
+        }
+      });
+
+      this.setState({
         saved: false,
         progress: prg,
         tempUrl: uploader.url(true)
@@ -48,6 +88,16 @@ class PinBuilder extends Component {
     uploader.send(e.target.files[0], (err, url) => {
       console.log(this.state);
       clearInterval(this.interval);
+      this.setState({
+        image: {
+          ...this.state.image,
+          loading: false,
+          loaded: true,
+          url: url,
+          progress: 100
+        }
+      });
+
       // Log service detailed response.
       if (err) {
         console.error("Error uploading", uploader.xhr.response);
@@ -55,7 +105,6 @@ class PinBuilder extends Component {
         return;
       }
       this.setState({
-        ...this.state,
         progress: 100,
         url: url
       });
@@ -82,22 +131,45 @@ class PinBuilder extends Component {
             Save
           </button>
         </div>
+        <div className="errors">
+          <ul className="errors">
+            {this.state.errors.map(item => (
+              <li>{item}</li>
+            ))}
+          </ul>
+        </div>
         <div className="pin-info">
           <div className="pin-image-selector-frame">
-            <input
-              required
-              className="pin-image-selector-input "
-              type="file"
-              id="pin-image"
-              name="pin-image"
-              accept="image/png, image/gif/,image/jpeg,image/jpg"
-              onChange={this.uploadFile}
-            />
-            <label for="pin-image" className="pin-image-selector">
-              Click to upload
-            </label>
-            {/* <img src={this.state.tempUrl} />
-            <h3>Progress:{this.state.progress}</h3> */}
+            {this.state.image.loading || this.state.image.loaded ? (
+              <div>
+                <img
+                  src={
+                    this.state.image.loaded
+                      ? this.state.image.url
+                      : this.state.image.tempUrl
+                  }
+                  className="pin-image"
+                />
+                <h3 className="pin-label">
+                  Progress:{this.state.image.progress}
+                </h3>
+              </div>
+            ) : (
+              <div>
+                <input
+                  required
+                  className="pin-image-selector-input "
+                  type="file"
+                  id="pin-image"
+                  name="pin-image"
+                  accept="image/png, image/gif/,image/jpeg,image/jpg"
+                  onChange={this.uploadFile}
+                />
+                <label for="pin-image" className="pin-image-selector">
+                  Click to upload
+                </label>
+              </div>
+            )}
           </div>
 
           <div className="pin-details">

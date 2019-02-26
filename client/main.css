@@ -131,7 +131,8 @@ button {
   width: 260px;
   height: 400px;
 }
-.pin-item h3 {
+.pin-item h3,
+.pin-label {
   margin-top: 0px;
   text-align: center;
   color: #395e66;
@@ -146,7 +147,7 @@ button {
   margin: 0 auto;
   width: 700px;
   height: 500px;
-  background-color: beige;
+  background-color: rgb(255, 255, 234);
   border-radius: 15px;
   padding: 30px;
   display: flex;
@@ -197,12 +198,12 @@ button {
   align-items: center;
 }
 .pin-image-selector-frame {
-  background-color: #32936f;
+  /* background-color: #32936f; */
   padding: 10px;
   border-radius: 10px;
 }
 .pin-image-selector {
-  background-color: #eeeeee;
+  background-color: #fefefe;
   border: 2px dashed;
   height: 300px;
   width: 300px;
@@ -215,7 +216,7 @@ button {
 }
 
 .pin-image-frame {
-  background-color: #eeeeee;
+  background-color: #fefefe;
   padding: 10px;
   border-radius: 10px;
 }
