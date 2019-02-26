@@ -4,18 +4,58 @@ import { Link, Redirect } from "react-router-dom";
 class RegistrationCard extends Component {
   constructor(props) {
     super(props);
-    this.state = { email: "", password: "", age: "", loggedIn: false };
+    this.state = {
+      email: "",
+      password: "",
+      age: "",
+      loggedIn: false,
+      errors: []
+    };
   }
 
-  onChange = (evt, input) => {
-    console.log(input);
-    console.log(this.state);
+  onChange = evt => {
+    this.setState({ [evt.target.name]: evt.target.value });
+  };
 
-    this.setState({ ...this.state, [input]: evt.target.value });
+  validate = () => {
+    let err = [];
+    this.setState({ errors: this.state.errors.splice(0) });
+
+    console.log(err);
+
+    if (this.state.email.trim() === "") {
+      err.push("Email is required.");
+    } else {
+      var re = /\S+@\S+\.\S+/;
+      if (!re.test(this.state.email)) {
+        err.push("Email is invalid.");
+      }
+    }
+    if (this.state.password.trim() === "") {
+      err.push("Password is required.");
+    }
+    if (this.state.age.trim() === "") {
+      err.push("Age is required.");
+    } else {
+      if (isNaN(this.state.age)) {
+        err.push("Age must be a number.");
+      } else if (parseInt(this.state.age) < 18) {
+        err.push("You must be an adult 18+.");
+      } else if (parseInt(this.state.age) > 120) {
+        err.push("Age is invalid.");
+      }
+    }
+    this.setState({ errors: err });
+    if (err.length > 0) {
+      return false;
+    }
+    return true;
   };
 
   registerUser = e => {
     e.preventDefault();
+    this.setState({ errors: [] });
+    if (!this.validate()) return;
     Meteor.call(
       "user.register",
       {
@@ -23,7 +63,10 @@ class RegistrationCard extends Component {
         password: this.state.password
       },
       err => {
-        if (err) alert(err);
+        if (err) {
+          this.setState({ errors: this.state.errors.concat([err.reason]) });
+          return;
+        }
         Meteor.loginWithPassword(
           this.state.email,
           this.state.password,
@@ -31,16 +74,16 @@ class RegistrationCard extends Component {
             if (err1) {
               console.log("error");
               console.log(err1);
+              this.setState({ errors: this.state.errors.concat([err.reason]) });
               return;
             }
-            this.setState({ ...this.state, loggedIn: true });
+            this.setState({ loggedIn: true });
           }
         );
       }
     );
   };
   render() {
-    console.log(this.state);
     const { toggleLogin } = this.props;
 
     return this.state.loggedIn ? (
@@ -51,22 +94,33 @@ class RegistrationCard extends Component {
           <img src="/images/logo.svg" />
           <h1>Sign up to see more</h1>
           <p>Access best ideas with a free account</p>
+          <ul className="errors">
+            {this.state.errors.map(item => (
+              <li>{item}</li>
+            ))}
+          </ul>
         </header>
         <form>
           <input
             type="email"
+            name="email"
+            value={this.state.email}
             placeholder="Email"
-            onChange={e => this.onChange(e, "email")}
+            onChange={e => this.onChange(e)}
           />
           <input
             type="password"
+            name="password"
+            value={this.state.password}
             placeholder="Create a password"
-            onChange={e => this.onChange(e, "password")}
+            onChange={e => this.onChange(e)}
           />
           <input
             type="text"
+            name="age"
             placeholder="Age"
-            onChange={e => this.onChange(e, "age")}
+            value={this.state.age}
+            onChange={e => this.onChange(e)}
           />
           <button onClick={this.registerUser}>Continue</button>
         </form>
