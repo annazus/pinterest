@@ -87,40 +87,59 @@ button {
 
 .pin-board {
   display: flex;
-  flex-direction: column;
-  flex-flow: column wrap;
-  height: 800px;
+  flex-direction: row;
+  flex-flow: row wrap;
   /* align-content: space-between; */
   justify-content: flex-start;
   align-items: center;
 }
 
 .pin-item {
-  background-color: #32936f80;
-  width: 22%;
-  margin: 1%;
-  padding: 10px;
+  margin: 5px 5px;
+  background-color: white;
+  /* width: 300px; */
+  /* margin: 5px 10px; */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  text-decoration: none;
+
+  justify-content: flex-start;
+}
+.pin-board a {
+  text-decoration: none;
 }
 
-.pin-picture {
-  padding: 10px;
-  width: 100%;
-  border-radius: 20px;
-}
-
-.pin-item:hover .pin-picture {
+.pin-item #hoverShow {
+  display: none;
+  position: absolute;
+  background-color: #eeeeee;
+  opacity: 0.5;
   width: 105%;
-  opacity: 0.3;
-  /* position: absolute;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  padding: 10px;
-  width: 100%;
-  border-radius: 20px;
-  opacity: 0.7;
-  background-color: rgba(259, 67, 95, 0.7); */
+  height: 105%;
+  left: -2.5%;
+  top: -2.5%;
+  border-radius: 10px;
+}
+
+.pin-title {
+  text-decoration: none;
+}
+.pin-picture {
+  border-radius: 10px;
+  width: 260px;
+  height: 400px;
+}
+.pin-item h3 {
+  margin-top: 0px;
+  text-align: center;
+  color: #395e66;
+  font-weight: 700;
+  text-decoration: none;
+}
+.pin-item:hover #hoverShow {
+  display: block;
 }
 
 .pin-builder {
@@ -201,7 +220,8 @@ button {
   border-radius: 10px;
 }
 .pin-image {
-  width: 300px;
+  width: 260px;
+  max-height: 600px;
   display: block;
   text-align: center;
   border-radius: 10px;

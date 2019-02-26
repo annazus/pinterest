@@ -9,13 +9,13 @@ class PinItem extends Component {
     const { pin } = this.props;
 
     return (
-      <div className="pin-item">
-        {/* <h1>{pin.title}</h1>
-        <p>{pin.description}</p> */}
-        <Link to={`/pin/${pin._id}`}>
+      <Link to={`/pin/${pin._id}`}>
+        <div className="pin-item">
           <img src={pin.url} className="pin-picture" />
-        </Link>
-      </div>
+          <h3 className="pin-title">{pin.title}</h3>
+          <div id="hoverShow" />
+        </div>
+      </Link>
     );
   }
 }
