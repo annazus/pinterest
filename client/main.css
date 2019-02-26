@@ -276,3 +276,12 @@ button {
   justify-content: space-between;
   align-items: center;
 }
+
+.errors {
+  color: red;
+  font-weight: 700;
+}
+
+.errors li {
+  list-style-type: none;
+}
