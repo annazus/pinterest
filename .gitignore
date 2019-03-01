@@ -2,3 +2,4 @@ node_modules/
 development.json
 staging.json
 production.json
+settings.json
