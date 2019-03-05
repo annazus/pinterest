@@ -10,6 +10,7 @@ class PinBuilder extends Component {
       saved: false,
       title: "",
       url: "",
+      originUrl: "",
       description: "",
       errors: [],
       image: {

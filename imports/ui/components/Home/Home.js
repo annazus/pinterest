@@ -6,11 +6,14 @@ import Pin from "../Pin";
 import SecureRoute from "../SecureRoute";
 import PinBuilder from "../PinBuilder";
 import Menu from "../Menu";
+import SelectURL from "../ImageLister";
 
 const Home = () => {
   return Meteor.userId() ? (
     <Fragment>
       <Menu />
+      <SelectURL />
+
       <Switch>
         <SecureRoute exact path="/" component={PinPage} />
         <SecureRoute path="/pin-builder" component={PinBuilder} />
