@@ -1,10 +1,10 @@
 import React, { Component } from "react";
-import imageScraper from "../../../api/imageScraper";
 import { Link, Route } from "react-router-dom";
 import { Meteor } from "meteor/meteor";
 class ImageLister extends Component {
   constructor(props) {
     super(props);
+    this.state = { images: [] };
   }
 
   savePic = pix => {
@@ -13,16 +13,30 @@ class ImageLister extends Component {
         console.log(err);
         return;
       }
+      console.log("saveURL");
+
       console.log(result);
+      this.props.onSelectURL(result);
     });
   };
 
-  render() {
-    // imageScraper("https://www.1stdibs.com", this.callbck);
+  fetchImages = () => {
+    Meteor.call("scrapeURL", this.props.url, (err, result) => {
+      console.log(result);
+      this.setState({ images: result });
+    });
+  };
 
-    return (
+  componentDidMount() {
+    this.fetchImages();
+  }
+
+  render() {
+    return this.state.images.length === 0 ? (
+      <span>No images found</span>
+    ) : (
       <ul>
-        {this.props.images.map(item => (
+        {this.state.images.map(item => (
           <li>
             <div onClick={() => this.savePic(item)}>
               <img src={item} />
@@ -34,36 +48,4 @@ class ImageLister extends Component {
   }
 }
 
-class SelectURL extends Component {
-  constructor(props) {
-    super(props);
-    this.state = { url: "", images: [] };
-  }
-
-  onChange = e => {
-    e.preventDefault();
-    this.setState({ [e.target.name]: e.target.value });
-  };
-  Fetch = () => {
-    Meteor.call("scrapeURL", this.state.url, (err, result) => {
-      console.log(result);
-      this.setState({ images: result });
-    });
-  };
-  render() {
-    return (
-      <div>
-        {/* <button onClick={this.savePic}>Save Pic</button> */}
-        <input
-          type="text"
-          name="url"
-          value={this.state.url}
-          onChange={this.onChange}
-          onBlur={this.Fetch}
-        />
-        <ImageLister images={this.state.images} />
-      </div>
-    );
-  }
-}
-export default SelectURL;
+export default ImageLister;

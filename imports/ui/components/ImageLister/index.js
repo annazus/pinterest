@@ -1,2 +1,2 @@
-import SelectURL from "./ImageLister";
-export default SelectURL;
+import ImageLister from "./ImageLister";
+export default ImageLister;
