@@ -3,14 +3,16 @@ import { Pins } from "../../../api/pins";
 import { Redirect } from "react-router-dom";
 import { Meteor } from "meteor/meteor";
 import uuid from "uuid";
+import ImageLister from "../ImageLister";
 class PinBuilder extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      listPictures: false,
       saved: false,
       title: "",
       url: "",
-      originUrl: "",
+      originURL: "",
       description: "",
       errors: [],
       image: {
@@ -18,7 +20,7 @@ class PinBuilder extends Component {
         loaded: false,
         progress: 0,
         tempUrl: "",
-        finalUrl: ""
+        url: ""
       }
     };
   }
@@ -49,6 +51,7 @@ class PinBuilder extends Component {
       title: this.state.title,
       description: this.state.description,
       url: this.state.url,
+      originURL: this.state.originURL,
       createdAt: new Date(),
       owner: Meteor.userId
     });
@@ -58,6 +61,23 @@ class PinBuilder extends Component {
   updateField = e => {
     this.setState({ [e.target.name]: e.target.value });
     console.log(this.state);
+  };
+  fetchPictures = () => {
+    if (this.state.originURL !== "") this.setState({ listPictures: true });
+  };
+  onSelectURL = url => {
+    console.log(url);
+    this.setState({
+      listPictures: false,
+      url: url,
+      image: {
+        loading: false,
+        loaded: true,
+        progress: 100,
+        tempUrl: "",
+        url: url
+      }
+    });
   };
   uploadFile = e => {
     console.log(e.target.value);
@@ -118,9 +138,11 @@ class PinBuilder extends Component {
   }
 
   render() {
-    console.log(this.props);
+    console.log(this.state);
     return this.state.saved ? (
       <Redirect to="/" />
+    ) : this.state.listPictures ? (
+      <ImageLister url={this.state.originURL} onSelectURL={this.onSelectURL} />
     ) : (
       <form className="pin-builder">
         <div className="pin-builder-save-row">
@@ -171,6 +193,17 @@ class PinBuilder extends Component {
                 </label>
               </div>
             )}
+            <div className="pin-url">
+              <input
+                className="pin-title"
+                type="text"
+                name="originURL"
+                placeholder="URL"
+                value={this.state.originURL}
+                onChange={this.updateField}
+              />
+              <button onClick={this.fetchPictures}>></button>
+            </div>
           </div>
 
           <div className="pin-details">

@@ -201,11 +201,18 @@ button {
   /* background-color: #32936f; */
   padding: 10px;
   border-radius: 10px;
+  height: 350px;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
 }
 .pin-image-selector {
   background-color: #fefefe;
   border: 2px dashed;
-  height: 300px;
+  height: 250px;
+  margin-top: 10px;
   width: 300px;
   display: inline-block;
   text-align: center;
@@ -325,4 +332,30 @@ button {
   padding: 8px 10px;
 
   margin-bottom: 10px;
+}
+.pin-url {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+.pin-url input {
+  width: 75%;
+}
+
+.pin-url button {
+  width: 20%;
+  background-color: white;
+  border: none;
+  border-radius: 5px;
+  margin: 10px;
+  padding: 10px;
+  font-size: 1.5em;
+  font-weight: 700;
+  height: 50px;
+  text-align: center;
+  vertical-align: middle;
+  /* margin: 10px; */
+  /* padding: 10px; */
+  /* font-size: 1.5em; */
+  /* font-weight: 700; */
 }

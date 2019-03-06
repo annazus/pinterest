@@ -7,9 +7,7 @@ class SelectURL extends Component {
     super(props);
     this.state = {
       url: "",
-      selectedPicture:
-        "https://s3-us-west-2.amazonaws.com/appliedar-pinterest/75c30c01-1656-4424-8dc9-8f0a88c016492.jpg",
-      listImages: false
+      selectedPicture: ""
     };
   }
 
@@ -20,36 +18,29 @@ class SelectURL extends Component {
   onSelectURL = pic => {
     this.setState({ selectedPicture: pic, url: "", listImages: false });
   };
+  onClickURL = () => {};
 
   render() {
     return (
       <div>
-        {/* <button onClick={this.savePic}>Save Pic</button> */}
-
-        {!this.state.listImages ? (
-          <div>
-            <input
-              className="url-list-input"
-              type="text"
-              name="url"
-              value={this.state.url}
-              onChange={this.onChange}
-              //   onBlur={this.Fetch}
-            />
-            <button
-              className="url-list-get"
-              onClick={() => {
-                this.setState({ listImages: true });
-              }}
+        <div>
+          <input
+            className="url-list-input"
+            type="text"
+            name="url"
+            value={this.state.url}
+            onChange={this.onChange}
+          />
+          <button
+            className="url-list-get"
+            onClick={() => {
+              this.setState({ listImages: true });
+            }}
+          >
             >
-              >
-            </button>
-
-            <img src={this.state.selectedPicture} />
-          </div>
-        ) : (
-          <ImageLister url={this.state.url} onSelectURL={this.onSelectURL} />
-        )}
+          </button>
+        </div>
+        )
       </div>
     );
   }

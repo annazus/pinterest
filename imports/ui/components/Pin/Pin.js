@@ -9,11 +9,15 @@ class Pin extends Component {
     super(props);
     console.log("constructor");
     console.log(props);
+    this.state = {
+      saved: false
+    };
     if (props.pin.length === 0) return;
     this.state = {
       saved: false,
       title: props.pin[0].title,
       url: props.pin[0].url,
+      originURL: props.pin[0].originURL,
       description: props.pin[0].description
     };
   }
@@ -55,8 +59,6 @@ class Pin extends Component {
     if (this.interval && this.state.progress > 100)
       clearInterval(this.interval);
   }
-  componentDidUpdate() {}
-  componentDidMount() {}
   render() {
     console.log("render");
 
@@ -90,6 +92,15 @@ class Pin extends Component {
         <div className="pin-info">
           <div className="pin-image-frame">
             <img src={pin.url} className="pin-image" />
+            <div className="pin-url">
+              <input
+                className="pin-title"
+                type="text"
+                name="originURL"
+                placeholder="URL"
+                value={this.state.originURL}
+              />
+            </div>
           </div>
 
           <div className="pin-details">
