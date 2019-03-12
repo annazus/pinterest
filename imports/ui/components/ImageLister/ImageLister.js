@@ -8,12 +8,14 @@ class ImageLister extends Component {
   }
 
   savePic = pix => {
-    Meteor.call("saveURL", pix, (err, result) => {
+    // Meteor.call("saveURL", pix, (err, result) => {
+    // saveImageFromURL;
+    Meteor.call("saveImageFromURL", pix, (err, result) => {
       if (err) {
         console.log(err);
         return;
       }
-      console.log("saveURL");
+      console.log("saveImageFromURL");
 
       console.log(result);
       this.props.onSelectURL(result);
